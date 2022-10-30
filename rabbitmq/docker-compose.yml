@@ -3,7 +3,7 @@ version: "3"
 services:
   rabbitmq:
     container_name: rabbitmq
-    image: bitnami/rabbitmq:14
+    image: bitnami/rabbitmq:3.11
     restart: always
     network_mode: bridge
     user: 0:0
