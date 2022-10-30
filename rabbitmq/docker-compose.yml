@@ -10,7 +10,7 @@ services:
     ports:
       - 5672:5672
     volumes:
-      - /var/lib/rabbitmq/data:/bitnami/rabbitmq/data
+      - /var/lib/rabbitmq:/bitnami
     environment:
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
     labels:
