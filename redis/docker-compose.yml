@@ -10,6 +10,6 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - /var/lib/redis/data:/bitnami/redis/data
+      - /var/lib/redis:/bitnami/redis
     environment:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
