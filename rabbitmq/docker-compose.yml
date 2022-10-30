@@ -6,10 +6,11 @@ services:
     image: bitnami/rabbitmq:14
     restart: always
     network_mode: bridge
+    user: 0:0
     ports:
       - 5672:5672
     volumes:
-      - /var/lib/rabbitmq:/bitnami/rabbitmq
+      - /var/lib/rabbitmq/data:/bitnami/rabbitmq/data
     environment:
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
     labels:
