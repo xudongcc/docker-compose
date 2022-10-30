@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: bitnami/rabbitmq:14
+    restart: always
+    network_mode: bridge
+    ports:
+      - 5672:5672
+    volumes:
+      - /var/lib/rabbitmq:/bitnami/rabbitmq
+    environment:
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+    labels:
+      - "traefik.http.routers.rabbitmq.entrypoints=websecure"
+      - "traefik.http.routers.rabbitmq.rule=Host(`${RABBITMQ_DOMAIN}`)"
+      - "traefik.http.routers.rabbitmq.service=rabbitmq"
+      - "traefik.http.services.rabbitmq.loadbalancer.server.port=15672"

@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  postgresql:
+    container_name: postgresql
+    image: bitnami/postgresql:14
+    restart: always
+    network_mode: bridge
+    ports:
+      - 5432:5432
+    volumes:
+      - /var/lib/postgresql:/bitnami/postgresql
+    environment:
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
