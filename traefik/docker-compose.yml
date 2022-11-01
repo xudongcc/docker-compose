@@ -12,9 +12,15 @@ services:
       - --providers.docker.exposedByDefault=true
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
+      # letsencrypt
       - --certificatesResolvers.letsencrypt.acme.email=${ACME_EMAIL}
       - --certificatesResolvers.letsencrypt.acme.dnsChallenge=true
       - --certificatesResolvers.letsencrypt.acme.dnsChallenge.provider=cloudflare
+      # zerossl
+      - --certificatesResolvers.zerossl.acme.caServer=https://acme.zerossl.com/v2/DV90
+      - --certificatesResolvers.zerossl.acme.email=${ACME_EMAIL}
+      - --certificatesResolvers.zerossl.acme.dnsChallenge=true
+      - --certificatesResolvers.zerossl.acme.dnsChallenge.provider=cloudflare
     ports:
       - 80:80
       - 443:443
