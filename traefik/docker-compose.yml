@@ -7,25 +7,22 @@ services:
     restart: always
     network_mode: bridge
     command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedByDefault=true"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedByDefault=true
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
       # letsencrypt
-      - "--certificatesResolvers.letsencrypt.acme.email=${ACME_EMAIL}"
-      - "--certificatesResolvers.letsencrypt.acme.dnsChallenge=true"
-      - "--certificatesResolvers.letsencrypt.acme.dnsChallenge.provider=cloudflare"
+      - --certificatesResolvers.letsencrypt.acme.email=${ACME_EMAIL}
+      - --certificatesResolvers.letsencrypt.acme.dnsChallenge=true
+      - --certificatesResolvers.letsencrypt.acme.dnsChallenge.provider=cloudflare
       # zerossl
-      - "--certificatesResolvers.zerossl.acme.caServer=https://acme.zerossl.com/v2/DV90"
-      - "--certificatesResolvers.zerossl.acme.email=${ACME_EMAIL}"
-      - "--certificatesResolvers.zerossl.acme.dnsChallenge=true"
-      - "--certificatesResolvers.zerossl.acme.dnsChallenge.provider=cloudflare"
-      - "--certificatesResolvers.zerossl.acme.dnsChallenge.eab.kid=${ZEROSSL_EAB_KID}"
-      - "--certificatesResolvers.zerossl.acme.dnsChallenge.eab.hmacEncoded=${ZEROSSL_EAB_HMAC_KEY}"
-      eab:
-        kid: abc123xyz
-        hmacEncoded: abc123xzy
+      - --certificatesResolvers.zerossl.acme.caServer=https://acme.zerossl.com/v2/DV90
+      - --certificatesResolvers.zerossl.acme.email=${ACME_EMAIL}
+      - --certificatesResolvers.zerossl.acme.dnsChallenge=true
+      - --certificatesResolvers.zerossl.acme.dnsChallenge.provider=cloudflare
+      - --certificatesResolvers.zerossl.acme.dnsChallenge.eab.kid=${ZEROSSL_EAB_KID}
+      - --certificatesResolvers.zerossl.acme.dnsChallenge.eab.hmacEncoded=${ZEROSSL_EAB_HMAC_KEY}
     ports:
       - 80:80
       - 443:443
