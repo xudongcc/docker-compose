@@ -16,5 +16,5 @@ services:
     labels:
       - "traefik.http.routers.rabbitmq.entrypoints=websecure"
       - "traefik.http.routers.rabbitmq.rule=Host(`${RABBITMQ_DOMAIN}`)"
-      - "traefik.http.routers.rabbitmq.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.rabbitmq.tls.certresolver=zerossl"
       - "traefik.http.services.rabbitmq.loadbalancer.server.port=15672"
