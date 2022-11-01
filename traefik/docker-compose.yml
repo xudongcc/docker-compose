@@ -8,15 +8,13 @@ services:
     network_mode: bridge
     command:
       - --api.insecure=true
-      - --providers.docker
+      - --providers.docker=true
+      - --providers.docker.exposedByDefault=true
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
-      - --entryPoints.web.http.redirections.entryPoint.to=websecure
-      - --entryPoints.web.http.redirections.entryPoint.scheme=https
-      - --entryPoints.web.http.redirections.entrypoint.permanent=true
-      - --certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL}
-      - --certificatesresolvers.letsencrypt.acme.dnsChallenge=true
-      - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=cloudflare
+      - --certificatesResolvers.letsencrypt.acme.email=${ACME_EMAIL}
+      - --certificatesResolvers.letsencrypt.acme.dnsChallenge=true
+      - --certificatesResolvers.letsencrypt.acme.dnsChallenge.provider=cloudflare
     ports:
       - 80:80
       - 443:443
@@ -24,3 +22,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
+    labels:
+      # Global redirection: http to https
+      traefik.http.routers.http-catchall.rule: HostRegexp(`{host:(www\.)?.+}`)
+      traefik.http.routers.http-catchall.entrypoints: web
+      traefik.http.routers.http-catchall.middlewares: www-to-https
+      # Global redirection: https (www.) to https
+      traefik.http.routers.https-catchall.tls: true
+      traefik.http.routers.https-catchall.rule: HostRegexp(`{host:(www\.).+}`)
+      traefik.http.routers.https-catchall.entrypoints: websecure
+      traefik.http.routers.https-catchall.middlewares: www-to-https
+      # middleware: http(s)://(www.) to  https://
+      traefik.http.middlewares.www-to-https.redirectRegex.regex: ^https?://(?:www\.)?(.+)
+      traefik.http.middlewares.www-to-https.redirectRegex.replacement: https://$${1}
+      traefik.http.middlewares.www-to-https.redirectRegex.permanent: true
