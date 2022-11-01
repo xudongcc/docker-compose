@@ -21,6 +21,11 @@ services:
       - --certificatesResolvers.zerossl.acme.email=${ACME_EMAIL}
       - --certificatesResolvers.zerossl.acme.dnsChallenge=true
       - --certificatesResolvers.zerossl.acme.dnsChallenge.provider=cloudflare
+      - --certificatesResolvers.zerossl.acme.dnsChallenge.eab.kid=${ACME_EAB_KID}
+      - --certificatesResolvers.zerossl.acme.dnsChallenge.eab.hmacEncoded=${ACME_EAB_HMAC_KEY}
+      eab:
+        kid: abc123xyz
+        hmacEncoded: abc123xzy
     ports:
       - 80:80
       - 443:443
