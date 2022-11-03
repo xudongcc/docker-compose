@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  v2ray:
+    container_name: v2ray
+    image: v2fly/v2fly-core
+    restart: always
+    network_mode: bridge
+    volumes:
+      - /etc/v2ray:/etc/v2ray
+    labels:
+      traefik.http.routers.v2ray.entrypoints: websecure
+      traefik.http.routers.v2ray.rule: Host(`${V2RAY_HOST}`) && Path(`${V2RAY_PATH}`)'
+      traefik.http.routers.v2ray.tls.certresolver: zerossl
+      traefik.http.services.v2ray.loadbalancer.server.port: 80
