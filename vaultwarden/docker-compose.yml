@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  vaultwarden:
+    container_name: vaultwarden
+    image: vaultwarden/server:latest
+    restart: always
+    volumes:
+      - ${VAULTWARDEN_DATA_PATH:vaultwarden_data}:/data
+    environment:
+      DOMAIN: https://${VAULTWARDEN_HOST:-vault.example.com}
+      WEBSOCKET_ENABLED: ${WEBSOCKET_ENABLED:-true}
+      SIGNUPS_ALLOWED: ${SIGNUPS_ALLOWED:-false}
+      INVITATIONS_ALLOWED: ${INVITATIONS_ALLOWED:-true}
+      SMTP_FROM: ${SMTP_FROM:-mailer@example.com}
+      SMTP_HOST: ${SMTP_HOST:-localhost}
+      SMTP_PORT: ${SMTP_PORT:-22}
+      SMTP_USERNAME: ${SMTP_USERNAME:-username}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-password}
+    labels:
+      traefik.http.routers.vaultwarden.entrypoints: websecure
+      traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST:-vault.example.com}`)
+      traefik.http.routers.vaultwarden.tls.certresolver: zerossl
