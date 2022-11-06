@@ -7,7 +7,7 @@ services:
     restart: always
     network_mode: bridge
     volumes:
-      - /etc/alist:/opt/alist/data
+      - ${ALIST_DATA_PATH:-/etc/alist}:/opt/alist/data
     labels:
       traefik.http.routers.alist.entrypoints: websecure
       traefik.http.routers.alist.rule: Host(`${ALIST_HOST}`)
