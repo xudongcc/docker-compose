@@ -6,7 +6,7 @@ services:
     image: vaultwarden/server:latest
     restart: always
     volumes:
-      - ${VAULTWARDEN_DATA_PATH:vaultwarden_data}:/data
+      - ${VAULTWARDEN_DATA_PATH:-vaultwarden_data}:/data
     environment:
       DOMAIN: https://${VAULTWARDEN_HOST:-vault.example.com}
       WEBSOCKET_ENABLED: ${WEBSOCKET_ENABLED:-true}
