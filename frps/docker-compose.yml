@@ -9,7 +9,7 @@ services:
     ports:
       - 7000:7000
     volumes:
-      - ${FRPS_CONFIG_PATH:/etc/frp}:/etc/frp
+      - ${FRPS_CONFIG_PATH:-/etc/frp}:/etc/frp
     labels:
       traefik.enable: true
       traefik.http.routers.frps.entrypoints: websecure
