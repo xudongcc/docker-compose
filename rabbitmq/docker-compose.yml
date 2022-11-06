@@ -12,9 +12,10 @@ services:
       - /var/lib/rabbitmq:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: user
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-secret}
     labels:
-      - "traefik.http.routers.rabbitmq.entrypoints=websecure"
-      - "traefik.http.routers.rabbitmq.rule=Host(`${RABBITMQ_DOMAIN}`)"
-      - "traefik.http.routers.rabbitmq.tls.certresolver=zerossl"
-      - "traefik.http.services.rabbitmq.loadbalancer.server.port=15672"
+      traefik.enable: true
+      traefik.http.routers.rabbitmq.entrypoints: websecure
+      traefik.http.routers.rabbitmq.rule: Host(`${RABBITMQ_HOST:-rabbitmq.example.com}`)
+      traefik.http.routers.rabbitmq.tls.certresolver: zerossl
+      traefik.http.services.rabbitmq.loadbalancer.server.port: 15672

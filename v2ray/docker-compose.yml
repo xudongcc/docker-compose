@@ -9,6 +9,7 @@ services:
     volumes:
       - /etc/v2ray:/etc/v2ray
     labels:
+      traefik.enable: true
       traefik.http.routers.v2ray.entrypoints: websecure
       traefik.http.routers.v2ray.rule: Host(`${V2RAY_HOST:-v2ray.example.com}`) && Path(`${V2RAY_PATH:-/v2ray}`)
       traefik.http.routers.v2ray.tls.certresolver: zerossl

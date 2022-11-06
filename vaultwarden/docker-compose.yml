@@ -5,6 +5,7 @@ services:
     container_name: vaultwarden
     image: vaultwarden/server:latest
     restart: always
+    network_mode: bridge
     volumes:
       - ${VAULTWARDEN_DATA_PATH:-vaultwarden_data}:/data
     environment:
@@ -18,6 +19,7 @@ services:
       SMTP_USERNAME: ${SMTP_USERNAME:-username}
       SMTP_PASSWORD: ${SMTP_PASSWORD:-password}
     labels:
+      traefik.enable: true
       traefik.http.routers.vaultwarden.entrypoints: websecure
       traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST:-vault.example.com}`)
       traefik.http.routers.vaultwarden.tls.certresolver: zerossl

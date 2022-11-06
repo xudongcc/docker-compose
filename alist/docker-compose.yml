@@ -9,6 +9,7 @@ services:
     volumes:
       - ${ALIST_DATA_PATH:-/etc/alist}:/opt/alist/data
     labels:
+      traefik.enable: true
       traefik.http.routers.alist.entrypoints: websecure
       traefik.http.routers.alist.rule: Host(`${ALIST_HOST}`)
       traefik.http.routers.alist.tls.certresolver: zerossl
