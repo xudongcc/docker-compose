@@ -11,5 +11,5 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.alist.entrypoints: websecure
-      traefik.http.routers.alist.rule: Host(`${ALIST_HOST}`)
+      traefik.http.routers.alist.rule: Host(`${ALIST_HOST:-alist.example.com}`)
       traefik.http.routers.alist.tls.certresolver: zerossl
