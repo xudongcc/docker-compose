@@ -11,3 +11,4 @@ services:
       traefik.http.routers.subconverter.entrypoints: websecure
       traefik.http.routers.subconverter.rule: Host(`${HOST:-subconverter.example.com}`)
       traefik.http.routers.subconverter.tls.certresolver: zerossl
+      traefik.http.services.subconverter.loadBalancer.server.port: 25500
