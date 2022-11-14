@@ -6,6 +6,8 @@ services:
     image: traefik:v2.9
     restart: always
     network_mode: bridge
+    extra_hosts:
+      - host.docker.internal:host-gateway
     command:
       - --api.insecure=true
       - --providers.docker=true
