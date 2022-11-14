@@ -19,17 +19,13 @@ services:
       # entrypoints
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
-      # letsencrypt
-      - --certificatesResolvers.letsencrypt.acme.email=${LETSENCRYPT_ACME_EMAIL:-acme@example.com}
-      - --certificatesResolvers.letsencrypt.acme.dnsChallenge=true
-      - --certificatesResolvers.letsencrypt.acme.dnsChallenge.provider=cloudflare
-      # zerossl
-      - --certificatesResolvers.zerossl.acme.caServer=https://acme.zerossl.com/v2/DV90
-      - --certificatesResolvers.zerossl.acme.email=${ZEROSSL_ACME_EMAIL:-acme@example.com}
-      - --certificatesResolvers.zerossl.acme.dnsChallenge=true
-      - --certificatesResolvers.zerossl.acme.dnsChallenge.provider=cloudflare
-      - --certificatesResolvers.zerossl.acme.eab.kid=${ZEROSSL_EAB_KID}
-      - --certificatesResolvers.zerossl.acme.eab.hmacEncoded=${ZEROSSL_EAB_HMAC_KEY}
+      # certificate resolver
+      - --certificatesResolvers.default.acme.dnsChallenge=true
+      - --certificatesResolvers.default.acme.dnsChallenge.provider=cloudflare
+      - --certificatesResolvers.default.acme.caServer=${TRAEFIK_ACME_CA_SERVER:-https://acme.zerossl.com/v2/DV90}
+      - --certificatesResolvers.default.acme.email=${TRAEFIK_ACME_EMAIL:-acme@example.com}
+      - --certificatesResolvers.default.acme.eab.kid=${TRAEFIK_ACME_EAB_KID}
+      - --certificatesResolvers.default.acme.eab.hmacEncoded=${TRAEFIK_ACME_EAB_HMAC_KEY}
     ports:
       - ${TRAEFIK_HTTP_PORT:-80}:80
       - ${TRAEFIK_HTTPS_PORT:-443}:443
