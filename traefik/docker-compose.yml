@@ -10,8 +10,13 @@ services:
       - host.docker.internal:host-gateway
     command:
       - --api.insecure=true
+      # docker provider
       - --providers.docker=true
       - --providers.docker.exposedByDefault=false
+      # file provider
+      - --providers.file.directory=/etc/traefik
+      - --providers.file.watch=true
+      # entrypoints
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
       # letsencrypt
@@ -26,12 +31,13 @@ services:
       - --certificatesResolvers.zerossl.acme.eab.kid=${ZEROSSL_EAB_KID}
       - --certificatesResolvers.zerossl.acme.eab.hmacEncoded=${ZEROSSL_EAB_HMAC_KEY}
     ports:
-      - ${HTTP_PORT:-80}:80
-      - ${HTTPS_PORT:-443}:443
+      - ${TRAEFIK_HTTP_PORT:-80}:80
+      - ${TRAEFIK_HTTPS_PORT:-443}:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${TRAEFIK_CONFIG_PATH:-/etc/traefik}:/etc/traefik
     environment:
-      CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
+      CF_DNS_API_TOKEN: ${TRAEFIK_CF_DNS_API_TOKEN}
     labels:
       # Global redirection: http to https
       traefik.http.routers.http-catchall.rule: HostRegexp(`{host:(www\.)?.+}`)
