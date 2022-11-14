@@ -17,5 +17,5 @@ services:
       traefik.enable: true
       traefik.http.routers.rabbitmq.entrypoints: websecure
       traefik.http.routers.rabbitmq.rule: Host(`${RABBITMQ_HOST:-rabbitmq.example.com}`)
-      traefik.http.routers.rabbitmq.tls.certresolver: zerossl
+      traefik.http.routers.rabbitmq.tls.certresolver: default
       traefik.http.services.rabbitmq.loadbalancer.server.port: 15672

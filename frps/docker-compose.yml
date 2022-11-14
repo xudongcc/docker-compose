@@ -14,7 +14,7 @@ services:
       traefik.enable: true
       traefik.http.routers.frps.entrypoints: websecure
       traefik.http.routers.frps.rule: HostRegexp(`{subdomain:[a-zA-Z0-9-]+}.${FRPS_HOST:-frps.example.com}`)
-      traefik.http.routers.frps.tls.certresolver: zerossl
+      traefik.http.routers.frps.tls.certresolver: default
       traefik.http.routers.frps.tls.domains[0].main: ${FRPS_HOST:-frps.example.com}
       traefik.http.routers.frps.tls.domains[0].sans: "*.${FRPS_HOST:-frps.example.com}"
       traefik.http.services.frps.loadbalancer.server.port: 80

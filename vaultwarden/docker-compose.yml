@@ -22,4 +22,4 @@ services:
       traefik.enable: true
       traefik.http.routers.vaultwarden.entrypoints: websecure
       traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST:-vault.example.com}`)
-      traefik.http.routers.vaultwarden.tls.certresolver: zerossl
+      traefik.http.routers.vaultwarden.tls.certresolver: default
