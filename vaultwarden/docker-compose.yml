@@ -11,7 +11,7 @@ services:
     environment:
       DOMAIN: https://${VAULTWARDEN_HOST:-vault.example.com}
       WEBSOCKET_ENABLED: ${WEBSOCKET_ENABLED:-true}
-      SIGNUPS_ALLOWED: ${SIGNUPS_ALLOWED:-false}
+      SIGNUPS_ALLOWED: ${SIGNUPS_ALLOWED:-true}
       INVITATIONS_ALLOWED: ${INVITATIONS_ALLOWED:-true}
       SMTP_FROM: ${SMTP_FROM:-mailer@example.com}
       SMTP_HOST: ${SMTP_HOST:-localhost}
