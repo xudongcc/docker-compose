@@ -21,6 +21,6 @@ services:
       traefik.enable: true
       traefik.http.routers.qbittorrent.entrypoints: websecure"
       traefik.http.routers.qbittorrent.rule: Host(`${QBITTORRENT_HOST:-qbittorrent.example.com}`)
-      traefik.http.routers.vaultwarden.tls.certresolver: default
+      traefik.http.routers.qbittorrent.tls.certresolver: default
       traefik.http.routers.qbittorrent.service: qbittorrent"
       traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
