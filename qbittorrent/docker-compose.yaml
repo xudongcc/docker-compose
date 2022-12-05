@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  qbittorrent:
+    container_name: qbittorrent
+    image: linuxserver/qbittorrent:latest
+    restart: always
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - WEBUI_PORT=8080
+    volumes:
+      - ${QBITTORRENT_CONFIG_PATH:-qbittorrent_config}:/config
+      - ${QBITTORRENT_DOWNLOAD_PATH}:/downloads
+    ports:
+      - 16881:16881
+      - 16881:16881/udp
+    labels:
+      traefik.enable: true
+      traefik.http.routers.qbittorrent.entrypoints: websecure"
+      traefik.http.routers.qbittorrent.rule: Host(`${QBITTORRENT_HOST:-qbittorrent.example.com}`)
+      traefik.http.routers.vaultwarden.tls.certresolver: default
+      traefik.http.routers.qbittorrent.service: qbittorrent"
+      traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
