@@ -3,7 +3,7 @@ version: "3"
 services:
   traefik:
     container_name: traefik
-    image: traefik:v2.9
+    image: traefik:${TRAEFIK_VERSION:-latest}
     restart: always
     network_mode: bridge
     extra_hosts:
@@ -22,16 +22,18 @@ services:
       # certificate resolver
       - --certificatesResolvers.default.acme.dnsChallenge=true
       - --certificatesResolvers.default.acme.dnsChallenge.provider=cloudflare
-      - --certificatesResolvers.default.acme.caServer=${TRAEFIK_ACME_CA_SERVER:-https://acme.zerossl.com/v2/DV90}
-      - --certificatesResolvers.default.acme.email=${TRAEFIK_ACME_EMAIL:-acme@example.com}
-      - --certificatesResolvers.default.acme.eab.kid=${TRAEFIK_ACME_EAB_KID}
-      - --certificatesResolvers.default.acme.eab.hmacEncoded=${TRAEFIK_ACME_EAB_HMAC_KEY}
+      - --certificatesResolvers.default.acme.caServer=${TRAEFIK_ACME_CA_SERVER:-https://acme-staging-v02.api.letsencrypt.org/directory}
+      - --certificatesResolvers.default.acme.email=${TRAEFIK_ACME_EMAIL}
+      - --certificatesResolvers.default.acme.eab.kid=${TRAEFIK_ACME_EAB_KID:-}
+      - --certificatesResolvers.default.acme.eab.hmacEncoded=${TRAEFIK_ACME_EAB_HMAC_KEY:-}
+      - --certificatesresolvers.default.acme.storage=/certs/acme.json
     ports:
       - ${TRAEFIK_HTTP_PORT:-80}:80
       - ${TRAEFIK_HTTPS_PORT:-443}:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${TRAEFIK_CONFIG_PATH:-/etc/traefik}:/etc/traefik
+      - ${TRAEFIK_CONFIG_PATH:-./config}:/etc/traefik
+      - ${TRAEFIK_CERTS_PATH:-./certs}:/certs
     environment:
       CF_DNS_API_TOKEN: ${TRAEFIK_CF_DNS_API_TOKEN}
     labels:
