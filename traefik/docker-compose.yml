@@ -32,8 +32,8 @@ services:
       - ${TRAEFIK_HTTPS_PORT:-443}:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${TRAEFIK_CONFIG_PATH:-./config}:/etc/traefik
-      - ${TRAEFIK_CERTS_PATH:-./certs}:/certs
+      - ${TRAEFIK_CONFIG_PATH:-config}:/etc/traefik
+      - ${TRAEFIK_CERTS_PATH:-certs}:/certs
     environment:
       CF_DNS_API_TOKEN: ${TRAEFIK_CF_DNS_API_TOKEN}
     labels:
@@ -50,3 +50,7 @@ services:
       traefik.http.middlewares.www-to-https.redirectRegex.regex: ^https?://(?:www\.)?(.+)
       traefik.http.middlewares.www-to-https.redirectRegex.replacement: https://$${1}
       traefik.http.middlewares.www-to-https.redirectRegex.permanent: true
+
+volumes:
+  config:
+  certs:
