@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  rsshub:
+    container_name: rsshub
+    image: diygod/rsshub:${RSSHUB_VERSION:-latest}
+    restart: always
+    network_mode: bridge
+    environment:
+      NODE_ENV: production
+    labels:
+      traefik.enable: true
+      traefik.http.routers.rsshub.entrypoints: websecure
+      traefik.http.routers.rsshub.rule: Host(`${RSSHUB_HOST:-rsshub.example.com}`)
+      traefik.http.routers.rsshub.tls.certresolver: default
