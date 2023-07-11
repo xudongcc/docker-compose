@@ -11,6 +11,7 @@ services:
     environment:
       TZ: ${TZ:-UTC}
       GENERIC_TIMEZONE: ${TZ:-UTC}
+      WEBHOOK_URL: https://${N8N_HOST:-n8n.example.com}/
     labels:
       traefik.enable: true
       traefik.http.routers.n8n.entrypoints: websecure
