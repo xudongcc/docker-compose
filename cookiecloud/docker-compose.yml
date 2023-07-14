@@ -10,6 +10,6 @@ services:
       WEBHOOK_URL: https://${COOKIECLOUD_HOST:-cookiecloud.example.com}/
     labels:
       traefik.enable: true
-      traefik.http.routers.n8n.entrypoints: websecure
-      traefik.http.routers.n8n.rule: Host(`${COOKIECLOUD_HOST:-cookiecloud.example.com}`)
-      traefik.http.routers.n8n.tls.certresolver: default
+      traefik.http.routers.cookiecloud.entrypoints: websecure
+      traefik.http.routers.cookiecloud.rule: Host(`${COOKIECLOUD_HOST:-cookiecloud.example.com}`)
+      traefik.http.routers.cookiecloud.tls.certresolver: default
