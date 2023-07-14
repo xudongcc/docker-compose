@@ -61,6 +61,7 @@ services:
       traefik.http.routers.qbittorrent.rule: Host(`${QBITTORRENT_HOST:-qbittorrent.example.com}`)
       traefik.http.routers.qbittorrent.tls.certresolver: default
       traefik.http.services.qbittorrent.loadbalancer.server.port: ${QBITTORRENT_WEBUI_PORT:-8080}
+      traefik.http.services.qbittorrent.loadbalancer.passhostheader: false
 
 volumes:
   nas-tools_config:
