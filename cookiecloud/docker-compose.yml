@@ -6,8 +6,6 @@ services:
     image: easychen/cookiecloud:${COOKIECLOUD_VERSION:-latest}
     restart: always
     network_mode: bridge
-    environment:
-      WEBHOOK_URL: https://${COOKIECLOUD_HOST:-cookiecloud.example.com}/
     labels:
       traefik.enable: true
       traefik.http.routers.cookiecloud.entrypoints: websecure
