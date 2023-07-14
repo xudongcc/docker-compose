@@ -13,3 +13,4 @@ services:
       traefik.http.routers.cookiecloud.entrypoints: websecure
       traefik.http.routers.cookiecloud.rule: Host(`${COOKIECLOUD_HOST:-cookiecloud.example.com}`)
       traefik.http.routers.cookiecloud.tls.certresolver: default
+      traefik.http.services.cookiecloud.loadbalancer.server.port: 8088
