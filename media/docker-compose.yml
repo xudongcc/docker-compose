@@ -42,6 +42,7 @@ services:
     container_name: qbittorrent
     image: nevinee/qbittorrent:${QBITTORRENT_VERSION:-latest}
     restart: always
+    network_mode: bridge
     ports:
       - ${QBITTORRENT_WEBUI_PORT:-8080}:${QBITTORRENT_WEBUI_PORT:-8080}
       - ${QBITTORRENT_BT_PORT:-6881}:${QBITTORRENT_BT_PORT:-6881}
