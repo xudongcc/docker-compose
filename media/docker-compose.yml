@@ -43,7 +43,7 @@ services:
     image: nevinee/qbittorrent:${QBITTORRENT_VERSION:-latest}
     restart: always
     ports:
-      - ${QBITTORRENT_WEBUI_PORT:-8080}:${QBITTORRENT_WEBUI_PORT:-8080}
+      # - ${QBITTORRENT_WEBUI_PORT:-8080}:${QBITTORRENT_WEBUI_PORT:-8080}
       - ${QBITTORRENT_BT_PORT:-6881}:${QBITTORRENT_BT_PORT:-6881}
       - ${QBITTORRENT_BT_PORT:-6881}:${QBITTORRENT_BT_PORT:-6881}/udp
     environment:
@@ -51,6 +51,7 @@ services:
       - PGID=0
       - TZ=${QBITTORRENT_TIMEZONE:-Etc/UTC}
       - BT_PORT=${QBITTORRENT_BT_PORT:-6881}
+      - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT:-8080}
     volumes:
       - ${QBITTORRENT_DATA_PATH:-qbittorrent_data}:/data
       - ${QBITTORRENT_DOWNLOAD_PATH:-./media/downloads}:/media/downloads
