@@ -10,6 +10,8 @@ services:
       - host.docker.internal:host-gateway
     command:
       - --api.insecure=true
+      # access log
+      - --accesslog=true
       # docker provider
       - --providers.docker=true
       - --providers.docker.exposedByDefault=false
