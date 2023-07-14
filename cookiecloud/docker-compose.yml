@@ -6,8 +6,6 @@ services:
     image: easychen/cookiecloud:${COOKIECLOUD_VERSION:-latest}
     restart: always
     network_mode: bridge
-    ports:
-      - ${COOKIECLOUD_PORT:-8088}:8088
     labels:
       traefik.enable: true
       traefik.http.routers.cookiecloud.entrypoints: websecure
