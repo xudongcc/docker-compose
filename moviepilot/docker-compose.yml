@@ -14,6 +14,8 @@ services:
       - DOWNLOAD_PATH=/media/downloads
       - LIBRARY_PATH=/media/libraries
       - TRANSFER_TYPE=link
+      # Proxy
+      - PROXY_HOST=${MOVIEPILOT_PROXY}
       # Coockie Cloud
       - COOKIECLOUD_HOST=${COOKIECLOUD_URL:-https://movie-pilot.org/cookiecloud}
       - COOKIECLOUD_KEY=${COOKIECLOUD_KEY}
