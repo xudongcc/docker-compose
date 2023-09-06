@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  moviepilot:
+    container_name: moviepilot
+    image: jxxghp/moviepilot:${MOVIEPILOT_VERSION:-latest}
+    restart: always
+    network_mode: bridge
+    volumes:
+      - ${MOVIEPILOT_CONFIG_PATH:-config}:/config
+      - ${MOVIEPILOT_MEDIA_PATH:-./media}:/media
+    environment:
+      - MOVIEPILOT_AUTO_UPDATE=false
+      - DOWNLOAD_PATH=/media/downloads
+      - LIBRARY_PATH=/media/libraries
+      - TRANSFER_TYPE=link
+      # Coockie Cloud
+      - COOKIECLOUD_HOST=${COOKIECLOUD_URL:-https://movie-pilot.org/cookiecloud}
+      - COOKIECLOUD_KEY=${COOKIECLOUD_KEY}
+      - COOKIECLOUD_PASSWORD=${COOKIECLOUD_PASSWORD}
+      # 下载器
+      - DOWNLOADER=qbittorrent
+      - QB_HOST=${QBITTORRENT_URL}
+      - QB_USER=${QBITTORRENT_USER}
+      - QB_PASSWORD=${QBITTORRENT_PASSWORD}
+      # 媒体服务器
+      - MEDIASERVER=emby
+      - EMBY_HOST=${EMBY_URL}
+      - EMBY_API_KEY=${EMBY_API_KEY}
+      # 认证
+      - AUTH_TYPE=iyuu
+      - IYUU_SIGN=${IYUU_SIGN}
+    labels:
+      traefik.enable: true
+      traefik.http.routers.moviepilot.entrypoints: websecure
+      traefik.http.routers.moviepilot.rule: Host(`${MOVIEPILOT_HOST:-moviepilot.example.com}`)
+      traefik.http.routers.moviepilot.tls.certresolver: default
+
+volumes:
+  config:
