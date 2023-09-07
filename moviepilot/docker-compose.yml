@@ -23,8 +23,8 @@ services:
       # 下载器
       - DOWNLOADER=qbittorrent
       - QB_HOST=${QBITTORRENT_URL}
-      - QB_USER=${QBITTORRENT_USER}
-      - QB_PASSWORD=${QBITTORRENT_PASSWORD}
+      - QB_USER=${QBITTORRENT_USERNAME:-admin}
+      - QB_PASSWORD=${QBITTORRENT_PASSWORD:-adminadmin}
       # 媒体服务器
       - MEDIASERVER=emby
       - EMBY_HOST=${EMBY_URL}
