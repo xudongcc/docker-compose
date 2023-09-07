@@ -24,7 +24,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.qbittorrent.entrypoints: websecure
-      traefik.http.routers.qbittorrent.rule: Host(`${QBITTORRENT_HOST:-qbittorrent.example.com}`)
+      traefik.http.routers.qbittorrent.rule: Host(`${QBITTORRENT_HOST:-qb.example.com}`)
       traefik.http.routers.qbittorrent.tls.certresolver: default
       traefik.http.services.qbittorrent.loadbalancer.server.port: ${QBITTORRENT_WEBUI_PORT:-8085}
       traefik.http.services.qbittorrent.loadbalancer.passhostheader: false
