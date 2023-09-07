@@ -9,12 +9,13 @@ services:
     ports:
       - ${QBITTORRENT_BT_PORT:-6881}:${QBITTORRENT_BT_PORT:-6881}
       - ${QBITTORRENT_BT_PORT:-6881}:${QBITTORRENT_BT_PORT:-6881}/udp
+      - ${QBITTORRENT_WEBUI_PORT:-8085}:${QBITTORRENT_WEBUI_PORT:-8085}
     environment:
       - PUID=0
       - PGID=0
       - TZ=${QBITTORRENT_TIMEZONE:-Etc/UTC}
       - BT_PORT=${QBITTORRENT_BT_PORT:-6881}
-      - WEBUI_PORT=8080
+      - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT:-8085}
       - QB_USERNAME=${QBITTORRENT_USERNAME:-admin}
       - QB_PASSWORD=${QBITTORRENT_PASSWORD:-adminadmin}
     volumes:
@@ -25,7 +26,7 @@ services:
       traefik.http.routers.qbittorrent.entrypoints: websecure
       traefik.http.routers.qbittorrent.rule: Host(`${QBITTORRENT_HOST:-qbittorrent.example.com}`)
       traefik.http.routers.qbittorrent.tls.certresolver: default
-      traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
+      traefik.http.services.qbittorrent.loadbalancer.server.port: ${QBITTORRENT_WEBUI_PORT:-8085}
       traefik.http.services.qbittorrent.loadbalancer.passhostheader: false
 
 volumes:
