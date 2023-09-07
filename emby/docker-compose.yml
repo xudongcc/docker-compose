@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  emby:
+    container_name: emby
+    image: emby/embyserver:${EMBY_VERSION:-latest}
+    network_mode: host
+    restart: always
+    environment:
+      - UID=0
+      - GID=0
+    volumes:
+      - ${EMBY_CONFIG_PATH:-config}:/config
+      - ${EMBY_LIBRARY_PATH:-./media/libraries}:/media/libraries
+    devices:
+      - /dev/dri:/dev/dri
+    labels:
+      traefik.enable: true
+      traefik.http.routers.emby.entrypoints: websecure
+      traefik.http.routers.emby.rule: Host(`${EMBY_HOST:-emby.example.com}`)
+      traefik.http.routers.emby.tls.certresolver: default
+      traefik.http.services.emby.loadbalancer.server.port: 8096
+
+volumes:
+  config:
