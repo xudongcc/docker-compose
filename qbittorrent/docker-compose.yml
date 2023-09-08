@@ -19,7 +19,7 @@ services:
       - QB_USERNAME=${QBITTORRENT_USERNAME:-admin}
       - QB_PASSWORD=${QBITTORRENT_PASSWORD:-adminadmin}
     volumes:
-      - ${QBITTORRENT_DATA_PATH:./data}:/data
+      - ${QBITTORRENT_DATA_PATH:-./data}:/data
       - ${QBITTORRENT_DOWNLOAD_PATH:-./media/downloads}:/media/downloads
     labels:
       traefik.enable: true

@@ -10,7 +10,7 @@ services:
       - UID=0
       - GID=0
     volumes:
-      - ${EMBY_CONFIG_PATH:./config}:/config
+      - ${EMBY_CONFIG_PATH:-./config}:/config
       - ${EMBY_LIBRARY_PATH:-./media/libraries}:/media/libraries
     devices:
       - /dev/dri:/dev/dri
