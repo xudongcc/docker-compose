@@ -10,7 +10,7 @@ services:
       - UID=0
       - GID=0
     volumes:
-      - ${EMBY_CONFIG_PATH:-config}:/config
+      - ${EMBY_CONFIG_PATH:./config}:/config
       - ${EMBY_LIBRARY_PATH:-./media/libraries}:/media/libraries
     devices:
       - /dev/dri:/dev/dri
@@ -20,6 +20,3 @@ services:
       traefik.http.routers.emby.rule: Host(`${EMBY_HOST:-emby.example.com}`)
       traefik.http.routers.emby.tls.certresolver: default
       traefik.http.services.emby.loadbalancer.server.port: 8096
-
-volumes:
-  config:
