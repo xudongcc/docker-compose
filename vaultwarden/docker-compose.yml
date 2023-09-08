@@ -7,7 +7,7 @@ services:
     restart: always
     network_mode: bridge
     volumes:
-      - ${VAULTWARDEN_DATA_PATH:-data}:/data
+      - ${VAULTWARDEN_DATA_PATH:-./data}:/data
     environment:
       - SIGNUPS_ALLOWED=${VAULTWARDEN_SIGNUPS_ALLOWED:-false}
       - INVITATIONS_ALLOWED=${VAULTWARDEN_INVITATIONS_ALLOWED:-true}
@@ -23,6 +23,3 @@ services:
       traefik.http.routers.vaultwarden.entrypoints: websecure
       traefik.http.routers.vaultwarden.rule: Host(`${VAULTWARDEN_HOST:-vault.example.com}`)
       traefik.http.routers.vaultwarden.tls.certresolver: default
-
-volumes:
-  data:
