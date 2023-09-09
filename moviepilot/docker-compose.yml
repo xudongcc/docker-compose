@@ -22,9 +22,14 @@ services:
       - COOKIECLOUD_PASSWORD=${COOKIECLOUD_PASSWORD}
       # 下载器
       - DOWNLOADER=qbittorrent
+      # qBittorrent
       - QB_HOST=${QBITTORRENT_URL}
       - QB_USER=${QBITTORRENT_USERNAME:-admin}
-      - QB_PASSWORD=${QBITTORRENT_PASSWORD:-adminadmin}
+      - QB_PASSWORD=${QBITTORRENT_PASSWORD:-password}
+      # Transmission
+      - TR_HOST=${TRANSMISSION_URL}
+      - TR_USER=${TRANSMISSION_USERNAME:-admin}
+      - TR_PASSWORD=${TRANSMISSION_PASSWORD:-password}
       # 通知
       - MESSAGER=telegram
       - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
