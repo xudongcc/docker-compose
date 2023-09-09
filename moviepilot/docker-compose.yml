@@ -9,6 +9,7 @@ services:
     volumes:
       - ${MOVIEPILOT_CONFIG_PATH:-./config}:/config
       - ${MOVIEPILOT_MEDIA_PATH:-./media}:/media
+      - ${QBITTORRENT_TORRENT_PATH:-./qbittorrent/torrents}:/qbittorrent/torrents
     environment:
       - MOVIEPILOT_AUTO_UPDATE=false
       - DOWNLOAD_PATH=/media/downloads
