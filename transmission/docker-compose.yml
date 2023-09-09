@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  transmission:
+    container_name: transmission
+    image: lscr.io/linuxserver/transmission:${TRANSMISSION_VERSION:-latest}
+    restart: always
+    network_mode: host
+    ports:
+      - ${TRANSMISSION_BT_PORT:-51413}:51413
+      - ${TRANSMISSION_BT_PORT:-51413}:51413/udp
+      - ${TRANSMISSION_WEBUI_PORT:-9091}:9091
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=${TRANSMISSION_TIMEZONE:-Asia/Shanghai}
+      - USER=${TRANSMISSION_USERNAME:-admin}
+      - NAME=${TRANSMISSION_PASSWORD:-adminadmin}
+    volumes:
+      - ${TRANSMISSION_CONFIG_PATH:-./config}:/config
+      - ${TRANSMISSION_DOWNLOAD_PATH:-./media/downloads}:/media/downloads
+    labels:
+      traefik.enable: true
+      traefik.http.routers.transmission.entrypoints: websecure
+      traefik.http.routers.transmission.rule: Host(`${TRANSMISSION_HOST:-tr.example.com}`)
+      traefik.http.routers.transmission.tls.certresolver: default
