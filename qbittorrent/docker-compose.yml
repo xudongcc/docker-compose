@@ -13,11 +13,11 @@ services:
     environment:
       - PUID=0
       - PGID=0
-      - TZ=${QBITTORRENT_TIMEZONE:-Etc/UTC}
+      - TZ=${TZ:-Asia/Shanghai}
       - BT_PORT=${QBITTORRENT_BT_PORT:-6881}
       - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT:-8085}
       - QB_USERNAME=${QBITTORRENT_USERNAME:-admin}
-      - QB_PASSWORD=${QBITTORRENT_PASSWORD:-adminadmin}
+      - QB_PASSWORD=${QBITTORRENT_PASSWORD:-password}
     volumes:
       - ${QBITTORRENT_DATA_PATH:-./data}:/data
       - ${QBITTORRENT_DOWNLOAD_PATH:-./media/downloads}:/media/downloads

@@ -13,9 +13,9 @@ services:
     environment:
       - PUID=0
       - PGID=0
-      - TZ=${TRANSMISSION_TIMEZONE:-Asia/Shanghai}
+      - TZ=${TZ:-Asia/Shanghai}
       - USER=${TRANSMISSION_USERNAME:-admin}
-      - NAME=${TRANSMISSION_PASSWORD:-adminadmin}
+      - NAME=${TRANSMISSION_PASSWORD:-password}
     volumes:
       - ${TRANSMISSION_CONFIG_PATH:-./config}:/config
       - ${TRANSMISSION_DOWNLOAD_PATH:-./media/downloads}:/media/downloads
