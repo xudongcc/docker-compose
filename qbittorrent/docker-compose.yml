@@ -5,7 +5,7 @@ services:
     container_name: qbittorrent
     image: nevinee/qbittorrent:${QBITTORRENT_VERSION:-latest}
     restart: always
-    network_mode: bridge
+    network_mode: host
     ports:
       - ${QBITTORRENT_BT_PORT:-6881}:${QBITTORRENT_BT_PORT:-6881}
       - ${QBITTORRENT_BT_PORT:-6881}:${QBITTORRENT_BT_PORT:-6881}/udp
