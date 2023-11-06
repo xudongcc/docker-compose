@@ -7,10 +7,10 @@ services:
     volumes:
       - ${ALIST_PATH:-./data}:/opt/alist/data
     environment:
+      - TZ=${TZ:-UTC}
       - PUID=0
       - PGID=0
       - UMASK=022
-      - TZ=UTC
     labels:
       traefik.enable: true
       traefik.http.routers.alist.entrypoints: websecure
