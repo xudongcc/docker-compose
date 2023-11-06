@@ -5,7 +5,7 @@ services:
     image: xhofe/alist:${ALIST_VERSION:-latest}
     restart: always
     volumes:
-      - ${ALIST_PATH:-./data}:/opt/alist/data
+      - ${ALIST_DATA_PATH:-./data}:/opt/alist/data
     environment:
       - TZ=${TZ:-UTC}
       - PUID=0
