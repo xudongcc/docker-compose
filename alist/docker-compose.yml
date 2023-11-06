@@ -1,0 +1,19 @@
+version: "3"
+services:
+  alist:
+    container_name: alist
+    image: xhofe/alist:${ALIST_VERSION:-latest}
+    restart: always
+    volumes:
+      - ${ALIST_PATH:-./data}:/opt/alist/data
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=022
+      - TZ=UTC
+    labels:
+      traefik.enable: true
+      traefik.http.routers.alist.entrypoints: websecure
+      traefik.http.routers.alist.rule: Host(`${ALIST_HOST:-alist.example.com}`)
+      traefik.http.routers.alist.tls.certresolver: default
+      traefik.http.services.alist.loadbalancer.server.port: 5244
