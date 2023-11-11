@@ -38,9 +38,9 @@ services:
       - TELEGRAM_USERS=${TELEGRAM_USERS}
       - TELEGRAM_ADMINS=${TELEGRAM_ADMINS}
       # 媒体服务器
-      - MEDIASERVER=emby
-      - EMBY_HOST=${EMBY_URL}
-      - EMBY_API_KEY=${EMBY_API_KEY}
+      - MEDIASERVER=plex
+      - PLEX_HOST=${PLEX_URL}
+      - PLEX_TOKEN=${PLEX_TOKEN}
       # 认证
       - AUTH_TYPE=iyuu
       - IYUU_SIGN=${IYUU_SIGN}
