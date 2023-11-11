@@ -18,6 +18,6 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.plex.entrypoints: websecure
-      traefik.http.routers.plex.rule: Host(`${EMBY_HOST:-plex.example.com}`)
+      traefik.http.routers.plex.rule: Host(`${PLEX_HOST:-plex.example.com}`)
       traefik.http.routers.plex.tls.certresolver: default
       traefik.http.services.plex.loadbalancer.server.port: 32400
