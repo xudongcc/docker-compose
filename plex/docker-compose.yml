@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker:${PLEX_VERSION:-latest}
+    restart: always
+    network_mode: host
+    environment:
+      - TZ=${TZ:-UTC}
+      - PLEX_CLAIM=${PLEX_CLAIM}
+    volumes:
+      - ${PLEX_CONFIG_PATH:-./config}:/config
+      - ${PLEX_TRANSCODE_PATH:-./transcode}:/transcode
+      - ${PLEX_LIBRARY_PATH:-./media/libraries}:/media/libraries
+    devices:
+      - /dev/dri:/dev/dri
+    labels:
+      traefik.enable: true
+      traefik.http.routers.plex.entrypoints: websecure
+      traefik.http.routers.plex.rule: Host(`${EMBY_HOST:-plex.example.com}`)
+      traefik.http.routers.plex.tls.certresolver: default
+      traefik.http.services.plex.loadbalancer.server.port: 32400
