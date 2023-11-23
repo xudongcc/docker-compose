@@ -28,15 +28,14 @@ services:
       - --certificatesResolvers.default.acme.email=${TRAEFIK_ACME_EMAIL}
       - --certificatesResolvers.default.acme.eab.kid=${TRAEFIK_ACME_EAB_KID:-}
       - --certificatesResolvers.default.acme.eab.hmacEncoded=${TRAEFIK_ACME_EAB_HMAC_KEY:-}
-      - --certificatesresolvers.default.acme.storage=/acme/acme.json
+      - --certificatesresolvers.default.acme.storage=/etc/traefik/acme/acme.json
     ports:
       - ${TRAEFIK_HTTP_PORT:-80}:80
       - ${TRAEFIK_HTTPS_PORT:-443}:443
       - ${TRAEFIK_WEB_UI_PORT:-8080}:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${TRAEFIK_CONFIG_PATH:-./config}:/etc/traefik
-      - ${TRAEFIK_ACME_PATH:-./acme}:/acme
+      - ${TRAEFIK_CONFIG_PATH:-/etc/traefik}:/etc/traefik
     environment:
       CF_DNS_API_TOKEN: ${TRAEFIK_CF_DNS_API_TOKEN}
     labels:
