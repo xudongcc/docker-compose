@@ -42,8 +42,10 @@ services:
       - EMBY_HOST=${EMBY_URL}
       - EMBY_API_KEY=${EMBY_API_KEY}
       # 认证
-      - AUTH_TYPE=iyuu
+      - AUTH_SITE=${AUTH_SITE:-iyuu}
       - IYUU_SIGN=${IYUU_SIGN}
+      - HHCLUB_USERNAME=${HHCLUB_USERNAME}
+      - HHCLUB_PASSKEY=${HHCLUB_PASSKEY}
     labels:
       traefik.enable: true
       traefik.http.routers.moviepilot.entrypoints: websecure
