@@ -24,6 +24,7 @@ services:
       # certificate resolver
       - --certificatesResolvers.default.acme.dnsChallenge=true
       - --certificatesResolvers.default.acme.dnsChallenge.provider=cloudflare
+      - --certificatesresolvers.default.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53
       - --certificatesResolvers.default.acme.caServer=${TRAEFIK_ACME_CA_SERVER:-https://acme-staging-v02.api.letsencrypt.org/directory}
       - --certificatesResolvers.default.acme.email=${TRAEFIK_ACME_EMAIL}
       - --certificatesResolvers.default.acme.eab.kid=${TRAEFIK_ACME_EAB_KID:-}
